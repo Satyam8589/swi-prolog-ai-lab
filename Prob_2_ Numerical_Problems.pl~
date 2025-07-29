@@ -1,0 +1,53 @@
+%Fibonacci:
+
+ fib(0, 0).
+fib(1, 1).
+fib(N, X) :-
+    N > 1,
+    N1 is N - 1,
+    N2 is N - 2,
+    fib(N1, X1),
+    fib(N2, X2),
+    X is X1 + X2.
+
+
+%Minimum of 3 Numbers:
+
+min2(X, Y, W):-
+    X =< Y, W = X.
+min2(X, Y, W):-
+    Y =< X, W = Y.
+min3(X, Y, Z, W) :-
+    min2(X, Y, X1),
+    min2(X1, Z, W).
+
+%SUM OF APP:
+
+sumap(F, D, N, X):-
+    N > 0,
+    T1 is 2 * F,
+    T2 is N - 1,
+    T3 is T2 * D,
+    sumTerm is T1 + T3,
+    X is (N * sumTerm) // 2.
+
+%LCM of three number:
+
+% GCD using Euclidean algorithm
+gcd(A, 0, A) :-
+    A > 0.
+gcd(A, B, G) :-
+    B > 0,
+    R is A mod B,
+    gcd(B, R, G).
+
+% LCM of two numbers
+lcm2(A, B, LCM) :-
+    gcd(A, B, G),
+    LCM is (A * B) // G.
+
+% LCM of three numbers
+lcm3(X, Y, Z, LCM) :-
+    lcm2(X, Y, TempLCM),
+    lcm2(TempLCM, Z, LCM).
+
