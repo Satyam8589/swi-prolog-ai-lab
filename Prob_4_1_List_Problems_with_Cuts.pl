@@ -1,0 +1,30 @@
+% (1) Minimum Element Search (Green Cut)
+min_list_cut([X], X) :- !.  % Only one element, it's the minimum
+min_list_cut([H|T], Min) :-
+    min_list_cut(T, TempMin),
+    H < TempMin,
+    !,
+    Min = H.
+min_list_cut([_|T], Min) :-
+    min_list_cut(T, Min).
+
+
+
+% (2) Day Type Classification (Red Cut)
+day_type(sunday, weekend) :- !.
+day_type(_, weekday).  % all others
+
+
+% (3) Insert into Sorted List (Red Cut)
+insert_sorted(X, [H|T], [X,H|T]) :-
+    X =< H, !.
+insert_sorted(X, [H|T], [H|R]) :-
+    insert_sorted(X, T, R).
+insert_sorted(X, [], [X]).  % inserting into empty list
+
+
+% (4) Insertion Sort (Red Cut)
+insertion_sort([], []).
+insertion_sort([H|T], Sorted) :-
+    insertion_sort(T, SortedTail),
+    insert_sorted(H, SortedTail, Sorted).
